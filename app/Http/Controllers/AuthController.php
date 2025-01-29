@@ -28,6 +28,7 @@ class AuthController extends Controller
     public function dashboard(): View
     {
         $user = auth()->user();
+
         return view('Auth/dashboard', compact('user'));
     }
 

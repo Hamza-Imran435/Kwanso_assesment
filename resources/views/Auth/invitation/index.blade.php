@@ -47,33 +47,15 @@
                     <hr class="dark horizontal my-0">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table  table-striped">
+                            <table class="table  table-striped yajra-datatable">
                                 <thead>
                                     <tr>
+                                        <th>SR No</th>
                                         <th>Email</th>
                                         <th>Status</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>john.doe@example.com</td>
-                                        <td>
-                                            <span class="badge bg-gradient-success">Accepted</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-outline-danger btn-sm">Decline</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>jane.doe@example.com</td>
-                                        <td>
-                                            <span class="badge bg-gradient-warning">Pending</span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-outline-success btn-sm">Accept</button>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -85,7 +67,7 @@
                 <div id="toast-template" class="toast fade hide" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header border-0">
                         <i class="material-symbols-rounded text-danger me-2">campaign</i>
-                        <span class="me-auto text-gradient text-danger font-weight-bold">Validation Error</span>
+                        <span class="me-auto text-gradient text-danger font-weight-bold">Message</span>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                     <hr class="horizontal dark m-0">
@@ -98,7 +80,6 @@
 @endsection
 
 @section('page-scripts')
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
             $('#send-invitation').on('click', function() {
@@ -112,11 +93,14 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
+                        console.log(response);
                         if (response.success) {
-                            alert('Invitation sent successfully!');
+                            showToast(response.message);
                         } else {
                             showToast('Failed to send invitation: ' + response.message);
                         }
+
+                        table.draw();
                     },
                     error: function(xhr, status, error) {
                         if (xhr.responseJSON && xhr.responseJSON.errors) {
@@ -147,6 +131,36 @@
                     });
                 }, 5000);
             }
+
+            var table = $('.yajra-datatable').DataTable({
+                oLanguage: {
+                    "sSearch": "Search"
+                },
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('invitations.list') }}",
+                    type: 'GET',
+                    data: function(d) {}
+                },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email',
+                        searchable: true,
+                        orderable: true,
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        searchable: true,
+                        orderable: true,
+                    }
+                ]
+            });
         });
     </script>
 @endsection

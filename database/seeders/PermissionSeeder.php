@@ -20,6 +20,7 @@ class PermissionSeeder extends Seeder
             ['name' => 'view-task'],
             ['name' => 'send-invites'],
             ['name' => 'resend-invites'],
+            ['name' => 'manage-roles&permissions'],
         ];
 
         foreach ($permissions as $permission) {
