@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('token')->unique();
+            $table->boolean('status')->default(false);
             $table->timestamp('expires_at');
             $table->timestamps();
         });

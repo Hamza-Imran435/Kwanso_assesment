@@ -18,6 +18,8 @@ class PermissionSeeder extends Seeder
             ['name' => 'edit-task'],
             ['name' => 'delete-task'],
             ['name' => 'view-task'],
+            ['name' => 'send-invites'],
+            ['name' => 'resend-invites'],
         ];
 
         foreach ($permissions as $permission) {
