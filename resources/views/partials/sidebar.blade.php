@@ -9,6 +9,7 @@
             <span class="ms-1 text-sm text-dark">Kwanso</span>
         </a>
     </div>
+
     <hr class="horizontal dark mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
@@ -18,7 +19,7 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            @if (auth()->user() && auth()->user()->hasPermission('send-invites'))
+            @if (auth()->check() && auth()->user()->hasPermission('send-invites'))
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('invitations.index') }}">
                         <i class="material-symbols-rounded opacity-5">person_add</i>
@@ -26,13 +27,23 @@
                     </a>
                 </li>
             @endif
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="../pages/billing.html">
-                    <i class="material-symbols-rounded opacity-5">receipt_long</i>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            @if (auth()->user() && auth()->user()->hasPermission('manage-roles&permissions'))
+            @if (auth()->check() && auth()->user()->hasPermission('manage-customers'))
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('client.index') }}">
+                        <i class="material-symbols-rounded opacity-5">person</i>
+                        <span class="nav-link-text ms-1">Clients</span>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->check() && auth()->user()->hasPermission('view-task'))
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ route('task.index') }}">
+                        <i class="material-symbols-rounded opacity-5">task</i>
+                        <span class="nav-link-text ms-1">Task</span>
+                    </a>
+                </li>
+            @endif
+            @if (auth()->check() && auth()->user()->hasPermission('manage-roles&permissions'))
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ route('role.permissions.index') }}">
                         <i class="material-symbols-rounded opacity-5">view_in_ar</i>
@@ -40,35 +51,6 @@
                     </a>
                 </li>
             @endif
-
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="../pages/notifications.html">
-                    <i class="material-symbols-rounded opacity-5">notifications</i>
-                    <span class="nav-link-text ms-1">Notifications</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Account pages
-                </h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="../pages/profile.html">
-                    <i class="material-symbols-rounded opacity-5">person</i>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="../pages/sign-in.html">
-                    <i class="material-symbols-rounded opacity-5">login</i>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="../pages/sign-up.html">
-                    <i class="material-symbols-rounded opacity-5">assignment</i>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li>
         </ul>
     </div>
 </aside>

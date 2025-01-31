@@ -23,7 +23,9 @@ class InvitationService
             'expires_at' => Carbon::now()->addDays($this->expirationDays),
         ]);
 
-        SendInvitationEmail::dispatch($invite);
+        info($invite->token);
+
+        // SendInvitationEmail::dispatch($invite);
 
         return $invite;
     }

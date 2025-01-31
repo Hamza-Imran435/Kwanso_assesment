@@ -11,16 +11,27 @@
                         <div class="card z-index-0 fadeIn3 fadeInBottom">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign in</h4>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Sign Up</h4>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('login.submit') }}">
+                                <form method="POST" action="{{ route('signup.submit') }}" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="input-group input-group-outline my-3">
+                                        <input type="hidden" name="invitation" value="{{ $token }}">
+                                        <input type="text" name="name" placeholder="Full Name" class="form-control">
+                                    </div>
                                     <div class="input-group input-group-outline my-3">
                                         <input type="email" name="email" placeholder="Email" class="form-control">
                                     </div>
+                                    <div class="input-group input-group-outline my-3">
+                                        <input type="text" name="phone" placeholder="Phone" class="form-control">
+                                    </div>
                                     <div class="input-group input-group-outline mb-3">
+                                        <input type="file" name="image" placeholder="Profile Image"
+                                            class="form-control">
+                                    </div>
+                                    <div class="input-group input-group-outline my-3">
                                         <input type="password" name="password" placeholder="Password" class="form-control">
                                     </div>
                                     <div class="text-center">

@@ -42,6 +42,19 @@
                                     </div>
                                 </div>
                             @endif
+                            @if (session('error'))
+                                <div class="toast fade show p-2 bg-white position-fixed bottom-0 end-0 mb-3 me-3"
+                                    role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header border-0">
+                                        <i class="material-symbols-rounded text-danger me-2"> check_circle </i>
+                                        <span class="me-auto text-gradient text-danger font-weight-bold">Warning</span>
+                                    </div>
+                                    <hr class="horizontal dark m-0">
+                                    <div class="toast-body">
+                                        {{ session('error') }}
+                                    </div>
+                                </div>
+                            @endif
 
                             @if ($errors->any())
                                 @foreach ($errors->all() as $message)

@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class ValidLoginRequest extends FormRequest
+class SignUpVerificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +22,12 @@ class ValidLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'required|unique:users,phone',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'invitation' => 'required|exists:invites,token',
             'password' => 'required',
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'email.required' => 'Email is required.',
-            'email.email' => 'Please provide a valid email address.',
-            'email.exists' => 'This email is not registered.',
-            'password.required' => 'Password is required.',
         ];
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Invite extends Model
 {
     protected $table = 'invites';
-    protected $fillable = ['email', 'token', 'expires_at', 'role_id'];
+    protected $fillable = ['email', 'token', 'expires_at', 'role_id', 'status'];
 
     public function isExpired()
     {
