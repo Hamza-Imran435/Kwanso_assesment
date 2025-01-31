@@ -25,7 +25,7 @@ class InvitationService
 
         info($invite->token);
 
-        // SendInvitationEmail::dispatch($invite);
+        SendInvitationEmail::dispatch($invite);
 
         return $invite;
     }
